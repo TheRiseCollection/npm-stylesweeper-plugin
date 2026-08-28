@@ -66,6 +66,32 @@ Use `styleSweeper` when you want to:
 - Gradually migrate inline styles into CSS modules, Tailwind, or design system components
 - Quickly audit a new or legacy codebase for inline styling practices
 
+## Development
+
+```
+npm install
+node index.js               # run against the current directory
+npm test                    # node test.js
+```
+
+`tmp-test/` is scratch for the test run and is not tracked. Run the tool against a
+real project before publishing: the failure that matters is a false positive, because
+a tool that reports a used class as dead gets used exactly once.
+
+## Decisions of record
+
+* **It reports; it does not delete.** styleSweeper prints what looks unused and stops
+  there. Static analysis cannot see a class name built at runtime from a template
+  string, so anything that deleted automatically would eventually delete something
+  live — and silently.
+
+* **`glob` and nothing heavier.** No PostCSS pipeline, no AST parse of the whole
+  project. The tool stays fast enough to run on every commit, which is what makes it
+  worth running at all.
+
+* **A finding is a question, not a verdict.** The output is a starting list for a
+  human, which is why the README leads with when *not* to trust it.
+
 ## License
 
 ISC © Joshua Paulsen / THE RISE COLLECTION
