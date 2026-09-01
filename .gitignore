@@ -1,0 +1,4 @@
+
+# Scratch fixtures from running the sweeper by hand. Real fixtures live beside
+# the tests; anything called tmp- is by definition not one.
+tmp-*/
